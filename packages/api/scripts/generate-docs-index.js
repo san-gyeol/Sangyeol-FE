@@ -62,6 +62,8 @@ function getCategoryDescription(category) {
     'Bookmarks': '북마크 관련 API',
     'Facilities': '편의시설 관련 API',
     'Pathways': '등산로 경로 관련 API',
+    'Controls': '실시간 통제정보 API',
+    'Weather': '날씨 API',
     'Constants': 'API 경로 상수',
     'Types': '타입 정의'
   };

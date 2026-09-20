@@ -7,7 +7,8 @@ export const ERROR_CODES = {
     message: "경로 변수(PathVariable)가 누락됐습니다.",
   },
   COMMON400_004: { status: 400, message: "쿼리 스트링이 누락됐습니다." },
-  COMMON500_001: { status: 500, message: "예기치 못한 에러가 발생했습니다." },
+  COMMON404_001: { status: 404, message: "요청한 리소스를 찾을 수 없습니다." },
+  COMMON500_001: { status: 500, message: "예기치 못한 예외가 발생했습니다." },
 
   // Auth
   AUTH400_001: { status: 400, message: "로그인 과정 중 에러가 발생했습니다" },
@@ -66,6 +67,12 @@ export const ERROR_CODES = {
   PATHWAY500_001: {
     status: 500,
     message: "(코스)경로의 위경도를 변환 중 에러가 발생하였습니다",
+  },
+
+  // Control
+  CONTROL502_001: {
+    status: 502,
+    message: "통제정보를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.",
   },
 } as const;
 
