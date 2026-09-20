@@ -1,12 +1,18 @@
 "use client";
 
 import SunIcon from "@icons/SunIcon";
-import useWeatherQuery from "@shared/api/queries/useWeatherQuery";
+import useCourseWeatherQuery from "@shared/api/queries/useCourseWeatherQuery";
 import InfoTile from "@shared/components/primitives/ui/InfoTile";
 import Image from "next/image";
 
-export default function CourseWeatherClothesInfoSection() {
-  const { data: weather } = useWeatherQuery();
+interface CourseWeatherClothesInfoSectionProps {
+  courseId: string;
+}
+
+export default function CourseWeatherClothesInfoSection({
+  courseId,
+}: CourseWeatherClothesInfoSectionProps) {
+  const { data: weather } = useCourseWeatherQuery(courseId);
 
   return (
     <div className="flex w-full gap-3">

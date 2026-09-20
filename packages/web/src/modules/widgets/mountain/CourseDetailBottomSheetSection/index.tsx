@@ -77,7 +77,10 @@ export default function CourseDetailBottomSheetSection() {
         <Carousel
           items={[
             <CourseImageInfoSection />,
-            <CourseWeatherClothesInfoSection key="weather" />,
+            <CourseWeatherClothesInfoSection
+              key="weather"
+              courseId={courseId}
+            />,
           ]}
         />
         <Spacing size={4} />
