@@ -45,9 +45,8 @@ authenticatedApi.interceptors.request.use(
 );
 
 authenticatedApi.interceptors.response.use(
-  (response: AxiosResponse) => {
-    return response.data;
-  },
+  // api 패키지 함수가 `response.data`로 body를 읽으므로 AxiosResponse를 그대로 넘긴다
+  (response: AxiosResponse) => response,
 
   async (error: AxiosError<ErrorResponse>) => {
     const err = Object.assign(

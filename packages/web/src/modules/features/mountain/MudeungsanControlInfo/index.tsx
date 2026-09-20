@@ -2,27 +2,19 @@
 
 import { Fragment } from "react";
 
+import useControlsQuery from "@shared/api/queries/useControlsQuery";
 import TriangleAlertIcon from "@shared/components/primitives/ui/icons/TriangleAlertIcon";
 import useRouteToExternalWebviewBridge from "@shared/hooks/domain/bridge/useRouteToExternalWebviewBridge";
 
 import ControlAreaItem from "./components/ControlAreaItem";
-
-const KNPS_CONTROL_DETAIL_PAGE_URL = (rstId: string) =>
-  `https://www.knps.or.kr/front/portal/safe/acsCtrDtl.do?menuNo=8000340&rstId=${rstId}`;
-
-interface ControlArea {
-  id: string;
-  name: string;
-  rstId: string;
-}
-
-const CONTROL_AREAS: ControlArea[] = [
-  { id: "mudeungsan", name: "무등산", rstId: "0025" },
-  { id: "mudeungsan-east", name: "무등산동부", rstId: "0026" },
-];
+import { KNPS_CONTROL_DETAIL_PAGE_URL } from "./constants";
+import { mergeControlZones } from "./utils";
 
 const MudeungsanControlInfo = () => {
+  const { data } = useControlsQuery();
   const routeToExternalWebview = useRouteToExternalWebviewBridge();
+
+  const controlAreas = mergeControlZones(data?.controls);
 
   const handleAreaClick = (rstId: string) => {
     routeToExternalWebview(KNPS_CONTROL_DETAIL_PAGE_URL(rstId));
@@ -43,12 +35,13 @@ const MudeungsanControlInfo = () => {
       </div>
 
       <div className="flex w-full flex-col rounded-xl bg-gray-300">
-        {CONTROL_AREAS.map((area, index) => (
-          <Fragment key={area.id}>
+        {controlAreas.map((area, index) => (
+          <Fragment key={area.zone}>
             {index > 0 && <div className="h-px w-full bg-gray-600" />}
             <ControlAreaItem
               name={area.name}
-              rstId={area.rstId}
+              status={area.status}
+              statusName={area.statusName}
               onClick={() => handleAreaClick(area.rstId)}
             />
           </Fragment>

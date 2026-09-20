@@ -1,30 +1,26 @@
-import useKnpsControlInfoQuery from "@shared/api/queries/useKnpsControlInfoQuery";
+import type { ControlStatus } from "api";
 import SwitchCase from "@shared/components/composites/SwitchCase";
+import FullControlBadge from "@shared/components/primitives/ui/CourseControlBadges/FullControlBadge";
 import PartialControlBadge from "@shared/components/primitives/ui/CourseControlBadges/PartialControlBadge";
 import PreparingControlBadge from "@shared/components/primitives/ui/CourseControlBadges/PreparingControlBadge";
 import WorkingOnControlBadge from "@shared/components/primitives/ui/CourseControlBadges/WorkingOnControlBadge";
 import MapPinIcon from "@shared/components/primitives/ui/icons/MapPinIcon";
 
-type ControlInfoStatus = "working" | "partial" | "preparing";
-
-const toControlInfoStatus = (knpsStatus?: string): ControlInfoStatus => {
-  if (!knpsStatus) return "preparing";
-  if (knpsStatus.includes("통제")) return "partial";
-  if (knpsStatus.includes("개방") || knpsStatus.includes("해제"))
-    return "working";
-  return "preparing";
-};
-
 interface ControlAreaItemProps {
   name: string;
-  rstId: string;
+  /** 통제 상태 코드. 없으면(로딩/에러) 준비 중 배지를 표시한다 */
+  status?: ControlStatus;
+  /** 서버가 내려주는 상태 한글명. 배지 문구로 그대로 표시한다 */
+  statusName?: string;
   onClick: () => void;
 }
 
-const ControlAreaItem = ({ name, rstId, onClick }: ControlAreaItemProps) => {
-  const { data } = useKnpsControlInfoQuery({ rstId });
-  const status = toControlInfoStatus(data?.status);
-
+const ControlAreaItem = ({
+  name,
+  status,
+  statusName,
+  onClick,
+}: ControlAreaItemProps) => {
   return (
     <button
       type="button"
@@ -38,9 +34,9 @@ const ControlAreaItem = ({ name, rstId, onClick }: ControlAreaItemProps) => {
       <SwitchCase
         value={status}
         caseBy={{
-          working: <WorkingOnControlBadge />,
-          partial: <PartialControlBadge />,
-          preparing: <PreparingControlBadge />,
+          NORMAL: <WorkingOnControlBadge label={statusName} />,
+          PARTIAL: <PartialControlBadge label={statusName} />,
+          FULL: <FullControlBadge label={statusName} />,
         }}
         defaultComponent={<PreparingControlBadge />}
       />

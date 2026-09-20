@@ -1,6 +1,6 @@
 "use client";
 
-import useKmaWeatherQuery from "@shared/api/queries/useKmaWeatherQuery";
+import useWeatherQuery from "@shared/api/queries/useWeatherQuery";
 import SunIcon from "@shared/components/primitives/ui/icons/SunIcon";
 import SunriseIcon from "@shared/components/primitives/ui/icons/SunriseIcon";
 import SunsetIcon from "@shared/components/primitives/ui/icons/SunsetIcon";
@@ -10,9 +10,7 @@ import useRouteToExternalWebviewBridge from "@shared/hooks/domain/bridge/useRout
 const MUDEUNGSAN_WEATHER_URL = `https://www.weather.go.kr/w/index.do#dong/${MUDEUNGSAN_KMA_DONG_CODE}/35.124385849219784/127.00913112151761/%EC%A0%84%EB%82%A8%EA%B4%91%EC%A3%BC%ED%86%B5%ED%95%A9%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EB%B6%81%EA%B5%AC%20%EA%B8%88%EA%B3%A1%EB%8F%99/SCH/%EB%AC%B4%EB%93%B1%EC%82%B0`;
 
 const MudeungsanWeatherNotice = () => {
-  const { data: weatherData } = useKmaWeatherQuery({
-    code: MUDEUNGSAN_KMA_DONG_CODE,
-  });
+  const { data: weatherData } = useWeatherQuery();
 
   const routeToExternalWebview = useRouteToExternalWebviewBridge();
 

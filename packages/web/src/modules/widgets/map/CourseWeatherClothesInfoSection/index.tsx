@@ -1,15 +1,12 @@
 "use client";
 
 import SunIcon from "@icons/SunIcon";
-import useKmaWeatherQuery from "@shared/api/queries/useKmaWeatherQuery";
+import useWeatherQuery from "@shared/api/queries/useWeatherQuery";
 import InfoTile from "@shared/components/primitives/ui/InfoTile";
-import { MUDEUNGSAN_KMA_DONG_CODE } from "@shared/constants/mountain/index";
 import Image from "next/image";
 
 export default function CourseWeatherClothesInfoSection() {
-  const { data: weather } = useKmaWeatherQuery({
-    code: MUDEUNGSAN_KMA_DONG_CODE,
-  });
+  const { data: weather } = useWeatherQuery();
 
   return (
     <div className="flex w-full gap-3">
