@@ -9,7 +9,8 @@
     "docs:generate-index": "node scripts/generate-docs-index.js",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@tanstack/react-query": "^5.90.2",
@@ -17,7 +18,8 @@
     "docflow": "^0.0.1",
     "tsup": "^8.5.0",
     "typescript": "^5.9.3",
-    "vitepress": "^1.6.4"
+    "vitepress": "^1.6.4",
+    "vitest": "^2.1.9"
   },
   "peerDependencies": {
     "@tanstack/react-query": "^5.90.2",
