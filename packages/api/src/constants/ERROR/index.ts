@@ -61,6 +61,7 @@ export const ERROR_CODES = {
 
   // Course & Bookmark
   COURSE400_001: { status: 404, message: "코스를 찾을 수 없습니다" },
+  COURSE404_001: { status: 404, message: "해당 코스를 찾을 수 없어요." },
   BOOKMARK400_001: { status: 404, message: "코스 북마크를 찾을 수 없습니다" },
 
   // Pathway
@@ -73,6 +74,12 @@ export const ERROR_CODES = {
   CONTROL502_001: {
     status: 502,
     message: "통제정보를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.",
+  },
+
+  // Weather
+  WEATHER502_001: {
+    status: 502,
+    message: "날씨 정보를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.",
   },
 } as const;
 

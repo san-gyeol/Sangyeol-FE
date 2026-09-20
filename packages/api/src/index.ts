@@ -28,6 +28,7 @@ export * from "./api/v1/travel/records/[recordId]";
 export * from "./api/v1/travel/records/[recordId]/details";
 export * from "./api/v1/controls";
 export * from "./api/v1/weather";
+export * from "./api/v1/courses/[courseId]/weather";
 
 // Model 타입들도 re-export
 export * from "./model/course";
