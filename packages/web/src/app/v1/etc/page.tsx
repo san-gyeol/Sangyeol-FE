@@ -1,5 +1,6 @@
 "use client";
 
+import useNotificationPermissionBridge from "@shared/hooks/domain/bridge/useNotificationPermissionBridge";
 import useRouteToExternalWebviewBridge from "@shared/hooks/domain/bridge/useRouteToExternalWebviewBridge";
 import BellIcon from "@icons/BellIcon";
 import ChevronRightIcon from "@icons/ChevronRightIcon";
@@ -9,10 +10,15 @@ import MailIcon from "@icons/MailIcon";
 import MessageCircleIcon from "@icons/MessageCircleIcon";
 import PencilIcon from "@icons/PencilIcon";
 import SafeArea from "@shared/components/primitives/layout/SafeArea";
+import { cn } from "@shared/utils/cn";
 import { PropsWithChildren, ReactNode } from "react";
 
 const ETCPage = () => {
   const routeToExternalWebview = useRouteToExternalWebviewBridge();
+  const {
+    isGranted: isNotificationGranted,
+    requestPermission: requestNotificationPermission,
+  } = useNotificationPermissionBridge();
 
   const handleClickServiceTerms = () => {
     routeToExternalWebview(
@@ -63,7 +69,13 @@ const ETCPage = () => {
               icon={<BellIcon size={ICON_SIZE} />}
               title="알림"
               value="푸시 알림 받기"
-              trailing={<Toggle />}
+              trailing={
+                <Toggle
+                  checked={isNotificationGranted}
+                  label="푸시 알림 받기"
+                  onClick={requestNotificationPermission}
+                />
+              }
             />
           </InfoSection>
 
@@ -121,11 +133,27 @@ const RowChevron = () => {
   );
 };
 
-const Toggle = () => {
+interface ToggleProps {
+  checked: boolean;
+  label: string;
+  onClick: () => void;
+}
+
+const Toggle = ({ checked, label, onClick }: ToggleProps) => {
   return (
-    <div className="flex h-6.5 w-11 shrink-0 flex-row items-center justify-end rounded-full bg-primary p-[3px]">
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      aria-label={label}
+      onClick={onClick}
+      className={cn(
+        "flex h-6.5 w-11 shrink-0 flex-row items-center rounded-full p-[3px]",
+        checked ? "justify-end bg-primary" : "justify-start bg-gray-600",
+      )}
+    >
       <div className="size-5 shrink-0 rounded-full bg-main-white" />
-    </div>
+    </button>
   );
 };
 
