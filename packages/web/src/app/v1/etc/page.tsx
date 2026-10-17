@@ -20,6 +20,10 @@ const ETCPage = () => {
     );
   };
 
+  const handleClickKakaoInquiry = () => {
+    routeToExternalWebview("https://pf.kakao.com/_xaSumX/chat");
+  };
+
   return (
     <div className="min-h-dvh bg-gray-300">
       <SafeArea>
@@ -44,6 +48,7 @@ const ETCPage = () => {
               icon={<MessageCircleIcon size={ICON_SIZE} />}
               title="카카오톡 1:1 문의하기"
               trailing={<RowChevron />}
+              onClick={handleClickKakaoInquiry}
             />
             <Divider />
             <InfoRow
