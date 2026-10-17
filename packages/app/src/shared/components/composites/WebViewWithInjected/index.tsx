@@ -5,6 +5,7 @@ import type {
   MessageEventRequestData,
   MessageEventResponseData,
 } from "@shared/types/webview";
+import * as Notifications from "expo-notifications";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Animated, View } from "react-native";
 import WebView from "react-native-webview";
@@ -67,6 +68,20 @@ const WebViewWithInjected = ({
         name: "get-current-position",
         status: "success",
         data: location,
+      };
+    }
+
+    // GET: 현재 알림 권한 조회, POST: 알림 권한 요청
+    if (name === "notification-permission") {
+      const { granted } =
+        method === "POST"
+          ? await Notifications.requestPermissionsAsync()
+          : await Notifications.getPermissionsAsync();
+
+      return {
+        name: "notification-permission",
+        status: "success",
+        data: { granted },
       };
     }
 
