@@ -2,7 +2,7 @@ const appConfig = {
   expo: {
     name: "산결",
     slug: "sangyeol",
-    version: "0.0.1",
+    version: "0.0.2",
     orientation: "portrait",
     icon: "./assets/images/App_Icon.png",
     scheme: "sangyeol",
@@ -16,6 +16,7 @@ const appConfig = {
     },
     android: {
       package: "com.sansan.sangyeol",
+      versionCode: 2,
       adaptiveIcon: {
         foregroundImage: "./assets/images/App_Icon.png",
         backgroundColor: "#ffffff",
