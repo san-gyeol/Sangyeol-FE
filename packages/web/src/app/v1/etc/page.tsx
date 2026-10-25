@@ -30,6 +30,10 @@ const ETCPage = () => {
     routeToExternalWebview("https://pf.kakao.com/_xaSumX/chat");
   };
 
+  const handleClickFeedback = () => {
+    routeToExternalWebview("https://forms.gle/eKscjLpcyG15nkKB7");
+  };
+
   return (
     <div className="min-h-dvh bg-gray-300">
       <SafeArea>
@@ -61,6 +65,7 @@ const ETCPage = () => {
               icon={<PencilIcon size={ICON_SIZE} />}
               title="피드백 남기기"
               trailing={<RowChevron />}
+              onClick={handleClickFeedback}
             />
           </InfoSection>
 
